@@ -42,3 +42,9 @@ export const Mini: Story = {
 		mini: true,
 	},
 };
+
+export const Single: Story = {
+	args: {
+		playlist: playlist.slice(0, 1),
+	},
+};
