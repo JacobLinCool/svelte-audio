@@ -23,14 +23,14 @@ pnpm i -D svelte-audio
     let mini = false;
 </script>
 
-<Audio bind:paused bind:time bind:volume bind:mini {playlist}>
-    <div>Loading ...</div> <!-- Loading Slot -->
-</Audio>
+<audio bind:paused bind:time bind:volume bind:mini {playlist}>
+    <!-- Loading Slot -->
+    <div>Loading ...</div>
+</audio>
 
-Paused: <input type="checkbox" bind:checked={paused} />
-Volume: <input type="range" min="0" max="1" step="0.01" bind:value={volume} />
-Mini: <input type="checkbox" bind:checked={mini} />
-Current Time: {time}s
+Paused: <input type="checkbox" bind:checked="{paused}" /> Volume:
+<input type="range" min="0" max="1" step="0.01" bind:value="{volume}" /> Mini:
+<input type="checkbox" bind:checked="{mini}" /> Current Time: {time}s
 ```
 
 <details>
@@ -43,16 +43,15 @@ export const playlist: Playlist = [
     {
         name: "ChatGPT Help Me!",
         artist: "Jacob, GPT-4, Suno v3",
-        cover: new URL("https://cdn1.suno.ai/image_6aee2edf-ba1e-4394-b75e-7385261c4e07.png"),
-        url: new URL("https://cdn1.suno.ai/ebb95c9f-ef34-4cd1-b0f1-d8a97666550a.mp3"),
-        lrc: new URL("https://storage.jacoblin.cool/ChatGPT-Help-Me.lrc"),
+        cover: "https://cdn1.suno.ai/image_6aee2edf-ba1e-4394-b75e-7385261c4e07.png",
+        url: "https://cdn1.suno.ai/ebb95c9f-ef34-4cd1-b0f1-d8a97666550a.mp3",
+        lrc: "https://storage.jacoblin.cool/ChatGPT-Help-Me.lrc",
     },
     {
         name: "Flavors of the Night: Taipei",
         artist: "Jacob, GPT-4, Suno v3",
-        cover: new URL("https://cdn1.suno.ai/image_3400c31e-d6ec-4101-80b1-1ae11dd3d220.png"),
-        url: new URL("https://cdn1.suno.ai/3400c31e-d6ec-4101-80b1-1ae11dd3d220.mp3"),
-        lrc: new URL("https://storage.jacoblin.cool/empty.lrc"),
+        cover: "https://cdn1.suno.ai/image_3400c31e-d6ec-4101-80b1-1ae11dd3d220.png",
+        url: "https://cdn1.suno.ai/3400c31e-d6ec-4101-80b1-1ae11dd3d220.mp3",
     },
 ];
 ```
@@ -62,3 +61,28 @@ export const playlist: Playlist = [
 ![screenshot](./images/screenshot.png)
 
 To see the full list of props, check out the [Storybook](https://jacoblincool.github.io/svelte-audio).
+
+### Access to APlayer Instance
+
+You can access the APlayer instance by using the `.player()` method.
+
+```html
+<script lang="ts">
+    import { Audio } from "svelte-audio";
+    import { playlist } from "./playlist";
+
+    let audio: Audio;
+
+    function remove() {
+        audio.player().list.clear();
+    }
+</script>
+
+<Audio bind:this={audio} {playlist}>
+    <div>Loading ...</div>
+</Audio>
+
+<button on:click={remove}> Remove Songs </button>
+```
+
+See all the API methods in the [APlayer Documentation](https://aplayer.js.org/#/home?id=api).

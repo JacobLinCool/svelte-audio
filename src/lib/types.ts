@@ -15,7 +15,7 @@ export interface ExtendedEvent {
 export type PlayerEvent = HTMLMediaElementEventMap & ExtendedEvent;
 
 /**
- * Player options, same as https://aplayer.js.org/#/home?id=options
+ * Player options, similar to https://aplayer.js.org/#/home?id=options
  */
 export interface PlayerOption {
 	fixed: boolean;
@@ -37,11 +37,21 @@ export interface PlayerOption {
 export interface AudioSource {
 	name?: string;
 	artist?: string;
-	url: URL;
-	cover?: URL;
+	/**
+	 * The URL of the audio file.
+	 */
+	url: string | URL;
+	/**
+	 * The URL of the cover image.
+	 */
+	cover?: string | URL;
+	/**
+	 * The URL of the lyric file. (.lrc)
+	 * Use Data URL (`data:text/plain...`) or Blob (`blob:...`) if you want to use inline lyric.
+	 */
 	lrc?: string | URL;
 	theme?: string;
-	type?: "auto" | "hls" | "normal" | (string & Record<string, never>);
+	type?: "auto" | "hls" | "normal" | (string & {});
 }
 
 export type Playlist = AudioSource[];

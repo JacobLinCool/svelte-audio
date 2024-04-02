@@ -44,13 +44,6 @@
 		const { default: APlayer } = await import("aplayer");
 
 		let lrc = playlist.filter((item) => item.lrc !== undefined).length;
-		if (lrc !== 0 && lrc !== playlist.length) {
-			throw new Error("All or none of the playlist items must have lrc");
-		}
-		let embeddedLrc = playlist.filter((item) => typeof item.lrc === "string").length;
-		if (embeddedLrc && embeddedLrc !== lrc) {
-			throw new Error("Cannot mix embedded and external lrc");
-		}
 
 		const audio = playlist.map((item) => {
 			return {
@@ -58,7 +51,7 @@
 				artist: item.artist,
 				url: item.url.toString(),
 				cover: item.cover?.toString(),
-				lrc: item.lrc?.toString(),
+				lrc: item.lrc?.toString() || "",
 				theme: item.theme,
 				type: item.type,
 			};
@@ -80,7 +73,7 @@
 			audio,
 			listMaxHeight,
 			customAudioType,
-			lrcType: lrc ? (embeddedLrc ? 1 : 3) : 0,
+			lrcType: lrc ? 3 : 0,
 		});
 
 		for (const event of events) {
