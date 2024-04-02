@@ -1,6 +1,6 @@
 {
 	"name": "svelte-audio",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"author": "JacobLinCool <jacob@csie.cool> (https://github.com/JacobLinCool)",
 	"license": "MIT",
 	"svelte": "./dist/index.js",
