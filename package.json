@@ -1,5 +1,14 @@
 {
 	"name": "svelte-audio",
+	"description": "Audio Player Component for Svelte.",
+	"keywords": [
+		"svelte",
+		"audio",
+		"lyric",
+		"player",
+		"mp3",
+		"lrc"
+	],
 	"version": "0.0.0",
 	"author": "JacobLinCool <jacob@csie.cool> (https://github.com/JacobLinCool)",
 	"license": "MIT",
@@ -13,6 +22,7 @@
 		}
 	},
 	"files": [
+		"README.md",
 		"dist",
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*"
@@ -79,5 +89,13 @@
 			"prettier --write"
 		]
 	},
-	"packageManager": "pnpm@8.15.6"
+	"packageManager": "pnpm@8.15.6",
+	"bugs": {
+		"url": "https://github.com/JacobLinCool/svelte-audio/issues"
+	},
+	"homepage": "https://jacoblincool.github.io/svelte-audio/",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/JacobLinCool/svelte-audio.git"
+	}
 }
