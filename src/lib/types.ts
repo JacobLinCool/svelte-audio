@@ -51,7 +51,7 @@ export interface AudioSource {
 	 */
 	lrc?: string | URL;
 	theme?: string;
-	type?: "auto" | "hls" | "normal" | (string & {});
+	type?: "auto" | "hls" | "normal" | (string & NonNullable<unknown>);
 }
 
 export type Playlist = AudioSource[];
