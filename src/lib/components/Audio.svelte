@@ -29,6 +29,8 @@
 	let nativeAudio: HTMLAudioElement;
 	let ready = playlist.length === 0;
 
+	let timeUpdateIgnore: number | null = null;
+
 	onMount(() => {
 		init(target);
 	});
@@ -89,6 +91,7 @@
 		nativeAudio = ap.audio;
 		nativeAudio.addEventListener("timeupdate", () => {
 			time = nativeAudio.currentTime;
+			timeUpdateIgnore = nativeAudio.currentTime;
 		});
 		nativeAudio.addEventListener("pause", () => {
 			paused = true;
@@ -124,7 +127,7 @@
 	}
 
 	$: {
-		if (ap && nativeAudio.currentTime !== time) {
+		if (ap && timeUpdateIgnore !== time) {
 			ap.seek(time);
 		}
 	}
